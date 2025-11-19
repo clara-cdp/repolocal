@@ -1,0 +1,25 @@
+name: Commit Logger
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch: # Permet activació manual
+
+jobs:
+  log-commits:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+       
+      - name: say hello
+        run: |
+          mkdir -p log/  # Asegura que el directorio existe
+          cd scripts
+          go run log_commits.go || exit 1  # Falla el job si el script falla
+
+      - name: Commit and push if changes
+        run: |
+  
+          echo "--- Hello my little felows/ ---"
+      
